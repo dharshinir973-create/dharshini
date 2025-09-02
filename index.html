@@ -1,81 +1,63 @@
-// Dark mode
-const root = document.documentElement;
-const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') root.classList.add('light');
-if (themeToggle) {
-  themeToggle.textContent = root.classList.contains('light') ? '🌞' : '🌙';
-  themeToggle.addEventListener('click', () => {
-    root.classList.toggle('light');
-    localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
-    themeToggle.textContent = root.classList.contains('light') ? '🌞' : '🌙';
-  });
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Final Year Project Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Smart Agriculture Monitoring System</h1>
+    <p class="tagline">Final Year Project Portfolio</p>
+  </header>
 
-// Mobile nav
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.getElementById('navMenu');
-if (navToggle && navMenu) {
-  navToggle.addEventListener('click', () => {
-    const open = navMenu.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navMenu.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  }));
-}
+  <section class="project-description">
+    <h2>Project Overview</h2>
+    <p>
+      This project aims to create a smart agriculture monitoring system using IoT sensors to track soil moisture, temperature, and humidity in real time. The data is sent to a cloud server and displayed via a user-friendly dashboard.
+    </p>
+  </section>
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const id = link.getAttribute('href').slice(1);
-    const target = document.getElementById(id);
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.pushState(null, '', '#' + id);
-    }
-  });
-});
+  <section class="technologies">
+    <h2>Technologies Used</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>Arduino UNO</li>
+      <li>ESP8266 Wi-Fi Module</li>
+      <li>Firebase Realtime Database</li>
+    </ul>
+  </section>
 
-// Year
-document.getElementById('year').textContent = new Date().getFullYear();
+  <section class="screenshots">
+    <h2>Project Screenshots</h2>
+    <img src="images/dashboard.png" alt="Dashboard Screenshot" />
+    <img src="images/hardware.jpg" alt="Hardware Setup" />
+  </section>
 
-// Project filter
-const filterButtons = document.querySelectorAll('.filter-btn');
-const cards = document.querySelectorAll('.projects-grid .card');
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-    btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
-    const tag = btn.dataset.filter;
-    cards.forEach(card => {
-      if (tag === 'all') { card.style.display = ''; return; }
-      const tags = (card.dataset.tags || '').split(' ');
-      card.style.display = tags.includes(tag) ? '' : 'none';
-    });
-  });
-});
+  <section class="team">
+    <h2>Team Members</h2>
+    <ul>
+      <li>John Doe – Developer</li>
+      <li>Jane Smith – Hardware Engineer</li>
+    </ul>
+  </section>
 
-// Modal
-document.querySelectorAll('.more-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const id = btn.dataset.modal;
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.setAttribute('aria-hidden','false');
-    const close = modal.querySelector('.modal-close');
-    const onKey = (e) => { if (e.key === 'Escape') close.click(); };
-    document.addEventListener('keydown', onKey);
-    close.addEventListener('click', () => {
-      modal.setAttribute('aria-hidden','true');
-      document.removeEventListener('keydown', onKey);
-    }, { once: true });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) close.click();
-    }, { once: true });
-  });
-});
+  <section class="downloads">
+    <h2>Downloads</h2>
+    <ul>
+      <li><a href="downloads/FinalReport.pdf" target="_blank">Final Report (PDF)</a></li>
+      <li><a href="downloads/SourceCode.zip" target="_blank">Source Code (ZIP)</a></li>
+      <li><a href="https://github.com/yourusername/project-repo" target="_blank">GitHub Repository</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:john@example.com">john@example.com</a></p>
+    <p>Phone: +91-9876543210</p>
+  </footer>
+</body>
+</html>
 
 
